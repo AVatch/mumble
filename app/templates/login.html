@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+
+<script src="https://cdn.auth0.com/js/lock/10.9.1/lock.min.js"></script>
+<script>
+  var lock = new Auth0Lock( "{{ context['auth0_client_id'] }}", "{{ context['auth0_domain'] }}", {
+    auth: {
+      redirectUrl: '{{ context["auth0_callback_url"] }}',
+      responseType: 'code',
+      params: {
+        scope: 'openid email' // Learn about scopes: https://auth0.com/docs/scopes
+      }
+    }
+  });
+</script>
+<button onclick="lock.show();">Login</button>
+
+{% endblock %}
